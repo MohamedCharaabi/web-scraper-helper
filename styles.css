@@ -1,0 +1,247 @@
+/* Previous styles remain the same, add these new styles */
+
+/* Modal specific styles */
+.modal-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.modal-btn-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.modal-btn-primary:hover {
+  background-color: #1976d2;
+}
+
+.modal-btn-secondary {
+  background-color: #757575;
+  color: white;
+}
+
+.modal-btn-secondary:hover {
+  background-color: #616161;
+}
+
+/* Enhanced selection item display */
+.selection-element {
+  color: #2196f3;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.selection-attributes,
+.selection-children {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.selection-attributes ul,
+.selection-children ul {
+  margin: 5px 0 0 0;
+  padding-left: 20px;
+}
+
+.selection-attributes li,
+.selection-children li {
+  margin-bottom: 3px;
+  color: #555;
+}
+
+/* Previous styles remain... */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-width: 350px;
+}
+
+.popup-container {
+  padding: 15px;
+}
+
+h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 18px;
+}
+
+h4 {
+  margin: 10px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.section {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #1976d2;
+}
+
+.btn-secondary {
+  background-color: #757575;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #616161;
+}
+
+.btn-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #da190b;
+}
+
+.selections-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.selection-item {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.selection-item:last-child {
+  margin-bottom: 0;
+}
+
+.selection-label {
+  font-weight: bold;
+  color: #2196f3;
+  margin-bottom: 4px;
+}
+
+.selection-text {
+  color: #555;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.selection-selector {
+  color: #888;
+  font-size: 10px;
+  font-family: monospace;
+  background: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.no-selections {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 20px;
+}
+
+.status {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.status.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.selection-value {
+  background-color: #e8f5e8;
+  border-left: 3px solid #4caf50;
+  padding: 8px;
+  margin: 8px 0;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #2e7d32;
+}
+
+.selection-value strong {
+  color: #1b5e20;
+}
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover:not(:disabled) {
+  background-color: #138496;
+}
