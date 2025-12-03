@@ -24,8 +24,14 @@
             case 'exportData':
                 sendResponse(exportData());
                 break;
+            case 'hideSelectionModal':
+                hideSelectionModal();
+                break;
         }
     });
+
+
+
 
     function startSelectionMode(label) {
         if (isSelecting) return;
@@ -56,7 +62,19 @@
         Selection Mode: ${label} - Click elements to configure selection
       </div>
     `;
+
+        //remove existing indicator if any
+        const existingIndicator = document.getElementById('selection-mode-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+            existingIndicator.replaceWith(indicator);
+            return;
+        }
+
+
         document.body.appendChild(indicator);
+
+
     }
 
     function stopSelectionMode() {
@@ -227,7 +245,7 @@
 
         // Add event listeners
         modal.querySelector('#close-modal').addEventListener('click', hideSelectionModal);
-        modal.querySelector('#cancel-selection').addEventListener('click', hideSelectionModal);
+        modal.querySelector('#cancel-selection').addEventListener('click', cancelSelection);
         modal.querySelector('#save-selection').addEventListener('click', () => saveSelection(element));
 
         // Close on backdrop click
@@ -236,6 +254,12 @@
                 hideSelectionModal();
             }
         });
+    }
+
+
+    function cancelSelection() {
+        hideSelectionModal();
+        isSelecting = false;
     }
 
     function hideSelectionModal() {
@@ -303,6 +327,7 @@
 
         hideSelectionModal();
         saveSelections();
+        isSelecting = false;
     }
 
     function generateElementId(element) {

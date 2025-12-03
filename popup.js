@@ -1,6 +1,8 @@
 // Popup script with code generation
 document.addEventListener('DOMContentLoaded', function () {
+
     const labelInput = document.getElementById('label-input');
+    const closePopupButton = document.getElementById('close-popup');
     const startButton = document.getElementById('start-selection');
     const stopButton = document.getElementById('stop-selection');
     const exportButton = document.getElementById('export-data');
@@ -15,11 +17,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load saved data
     loadSelections();
 
+    closePopupButton.addEventListener('click', closePopoup);
     startButton.addEventListener('click', startSelection);
     stopButton.addEventListener('click', stopSelection);
     exportButton.addEventListener('click', exportData);
     clearButton.addEventListener('click', clearAll);
     generateCodeButton.addEventListener('click', generatePythonCode);
+
+
+    function closePopoup() {
+        // Notify content script to hide any modals
+        browser.tabs.query({ active: true, currentWindow: true }).then(tabs => {
+            browser.tabs.sendMessage(tabs[0].id, {
+                action: 'hideSelectionModal'
+            });
+        }).finally(() => {
+            window.close();
+        });
+    }
 
     function startSelection() {
         const label = labelInput.value.trim();
@@ -36,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function () {
             isSelecting = true;
             updateUI();
             showStatus('Selection mode started', 'success');
+
+
+
         }).catch(error => {
             showStatus('Error: ' + error.message, 'error');
         });
@@ -192,6 +210,7 @@ from typing import Dict, List, Optional
     scraped_data = []
     
 `;
+
 
         const extractionLogic = selections.map(selection => {
             const label = selection.label.replace(/[^a-zA-Z0-9_]/g, '_');
