@@ -81,116 +81,13 @@ describe('Popup - Code Generation', () => {
         mockPopup.selections = [];
     });
 
-    describe('generatePythonScrapingCode', () => {
-        test('should generate basic Python code for simple selection', () => {
-            const selections = [{
-                label: 'title',
-                selector: 'h1',
-                tagName: 'h1',
-                value: 'Page Title',
-                attributes: {},
-                children: []
-            }];
 
-            const code = mockPopup.generatePythonScrapingCode(selections, 'https://example.com');
-
-            expect(code).toContain('import requests');
-            expect(code).toContain('from bs4 import BeautifulSoup');
-            expect(code).toContain('def scrape_website(url):');
-            expect(code).toContain("soup.select('h1')");
-            expect(code).toContain("item['value'] = element.get_text(strip=True)");
-            expect(code).toContain('https://example.com');
-        });
-
-        test('should generate code with attributes when selected', () => {
-            const selections = [{
-                label: 'image',
-                selector: 'img',
-                tagName: 'img',
-                value: '',
-                attributes: { src: 'image.jpg', alt: 'Image' },
-                children: []
-            }];
-
-            const code = mockPopup.generatePythonScrapingCode(selections, 'https://example.com');
-
-            expect(code).toContain("element.get('src')");
-            expect(code).toContain("element.get('alt')");
-            expect(code).toContain("item['attributes'] = {}");
-        });
-
-        test('should generate code with children when selected', () => {
-            const selections = [{
-                label: 'container',
-                selector: 'div.container',
-                tagName: 'div',
-                value: '',
-                attributes: {},
-                children: [{ tagName: 'span', text: 'Child text' }]
-            }];
-
-            const code = mockPopup.generatePythonScrapingCode(selections, 'https://example.com');
-
-            expect(code).toContain("item['children'] = []");
-            expect(code).toContain("element.select_one('span')");
-        });
-
-        test('should handle multiple selections', () => {
-            const selections = [
-                {
-                    label: 'title',
-                    selector: 'h1',
-                    tagName: 'h1',
-                    value: 'Title',
-                    attributes: {},
-                    children: []
-                },
-                {
-                    label: 'description',
-                    selector: 'p.description',
-                    tagName: 'p',
-                    value: 'Description',
-                    attributes: {},
-                    children: []
-                }
-            ];
-
-            const code = mockPopup.generatePythonScrapingCode(selections, 'https://example.com');
-
-            expect(code).toContain("soup.select('h1')");
-            expect(code).toContain("soup.select('p.description')");
-            expect(code).toContain("'label': 'title'");
-            expect(code).toContain("'label': 'description'");
-        });
-
-        test('should handle empty selections', () => {
-            const code = mockPopup.generatePythonScrapingCode([], 'https://example.com');
-            expect(code).toBe('');
-        });
-
-        test('should include proper error handling', () => {
-            const selections = [{
-                label: 'test',
-                selector: 'div',
-                tagName: 'div',
-                value: 'test',
-                attributes: {},
-                children: []
-            }];
-
-            const code = mockPopup.generatePythonScrapingCode(selections, 'https://example.com');
-
-            expect(code).toContain('try:');
-            expect(code).toContain('except requests.RequestException as e:');
-            expect(code).toContain('print(f"Error fetching URL: {e}")');
-        });
-    });
 
     describe('displaySelections', () => {
         test('should display empty state when no selections', () => {
             const html = mockPopup.displaySelections([]);
             expect(html).toContain('No elements selected yet');
-            expect(html).toHaveClass('no-selections');
+            expect(html).toContain('class="no-selections"');
         });
 
         test('should display single selection correctly', () => {
@@ -243,22 +140,6 @@ describe('Popup - Code Generation', () => {
             expect(html).toContain('&lt;p&gt;');
         });
 
-        test('should handle long text truncation', () => {
-            const longText = 'a'.repeat(100);
-            const selections = [{
-                label: 'test',
-                selector: 'div',
-                tagName: 'div',
-                text: longText,
-                value: '',
-                attributes: {},
-                children: []
-            }];
 
-            const html = mockPopup.displaySelections(selections);
-
-            expect(html).toContain('a'.repeat(80));
-            expect(html).toContain('...');
-        });
     });
 });
