@@ -256,3 +256,96 @@ input[type="text"] {
   margin-bottom: 15px;
   gap: 15px;
 }
+
+/* Selection item header with remove button */
+.selection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.selection-label {
+  font-weight: bold;
+  color: #2196f3;
+  flex: 1;
+}
+
+.remove-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-left: 8px;
+}
+
+.remove-btn:hover {
+  background: #d32f2f;
+  transform: scale(1.05);
+}
+
+.remove-btn:active {
+  transform: scale(0.95);
+}
+
+.remove-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Animation for item removal */
+.selection-item.removing {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Enhanced selection item */
+.selection-item {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.selection-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-color: #bdbdbd;
+}
+
+/* Update existing styles */
+.selection-element {
+  color: #2196f3;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.selection-text {
+  color: #555;
+  font-size: 12px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.selection-selector {
+  color: #888;
+  font-size: 10px;
+  font-family: monospace;
+  background: #f5f5f5;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border-left: 3px solid #2196f3;
+  margin-top: 8px;
+  word-break: break-all;
+}

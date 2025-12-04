@@ -8,6 +8,9 @@
 
     // Load saved selections from storage
     browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+
+        console.log('Content script received message:', message);
+
         switch (message.action) {
             case 'startSelection':
                 startSelectionMode(message.label);
@@ -27,10 +30,28 @@
             case 'hideSelectionModal':
                 hideSelectionModal();
                 break;
+            case 'removeSelection':
+                sendResponse(removeSelection(message.label));
+                break;
         }
     });
 
 
+
+
+    function removeSelection(label) {
+
+
+
+
+        if (selectedElements.has(label)) {
+            selectedElements.delete(label);
+            saveSelections();
+            return { success: true };
+        } else {
+            return { success: false, error: 'Selection not found' };
+        }
+    }
 
 
     function startSelectionMode(label) {
@@ -300,8 +321,11 @@
             });
         });
 
-        const elementId = generateElementId(element);
+        // Generate unique ID for this selection
+        const selectionId = `selection_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
         const selectionData = {
+            id: selectionId,
             label: currentLabel,
             selector: generateSelector(element),
             tagName: element.tagName.toLowerCase(),
@@ -317,7 +341,7 @@
             selectionData.value = selectedValue.text;
         }
 
-        selectedElements.set(elementId, selectionData);
+        selectedElements.set(currentLabel, selectionData);
 
         // Visual feedback
         element.style.outline = '2px solid #4CAF50';
@@ -384,6 +408,11 @@
     }
 
     function getSelections() {
+
+        if (selectedElements.size === 0) {
+            return [];
+        }
+
         return Array.from(selectedElements.entries()).map(([id, data]) => ({
             id,
             ...data
@@ -423,7 +452,7 @@
     browser.runtime.sendMessage({ action: 'loadData' }).then(response => {
         if (response && response.data) {
             response.data.selections.forEach(selection => {
-                selectedElements.set(selection.id, selection);
+                selectedElements.set(selection.label, selection);
             });
         }
     });
